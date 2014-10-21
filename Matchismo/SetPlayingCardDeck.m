@@ -17,13 +17,27 @@
     self = [super init];
     
     if (self) {
+        //for suits in validSuit (shape)
         for (NSString *suit in [SetPlayingCard2 validSuits]) {
             //NSLog(suit);
+            //for ranks in validRanks (count)
             for (NSUInteger rank = 1 ; rank <= [SetPlayingCard2 maxRank] ; rank++) {
-                SetPlayingCard2 *card = [[SetPlayingCard2 alloc] init];
-                card.rank = rank;
-                card.suit = suit;
-                [self addCard:card];
+                //for color in validColors
+                //for alpha in validAlpha
+                for (UIColor *color in [SetPlayingCard2 validColors]) {
+                    //for (float alpha in [SetPlayingCard2 validAlphaValue]){
+                    for (float i = 0; i <= 1; i = i + .5){
+                        SetPlayingCard2 *card = [[SetPlayingCard2 alloc] init];
+                        card.rank = rank;
+                        card.suit = suit;
+                        card.color = color;
+                        card.alpha = i;
+                        [self addCard:card];
+                    }
+                }
+                
+                
+                
             }
         }
     }

@@ -13,8 +13,24 @@
 
 @property (strong, nonatomic) NSString *suit;
 @property (nonatomic) NSUInteger rank;
+@property (strong, nonatomic) UIColor *color;
+@property (nonatomic) float alpha;
 
+@property (strong, nonatomic) NSAttributedString *colorAndAlpha;
+
+
+
++ (NSArray *)validColors;
++ (NSArray *)validAlphaValue;
 + (NSArray *)validSuits;
 + (NSUInteger)maxRank;
+
+
+@property (strong, nonatomic) NSString *shape;
+//@property (strong, nonatomic) NSString *color;
+@property (strong, nonatomic) NSString *fill;
+//@property (nonatomic) int count;
+
+
 
 @end

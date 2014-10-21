@@ -122,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				20B08ED419F4CE200081D01F /* SetGameViewController.h */,
+				20B08EC019F4CB110081D01F /* SetGameViewController.m */,
 				20B08ED319F4CDC70081D01F /* SetCard.h */,
 				20B08ECD19F4CBF10081D01F /* SetCard.m */,
 				20B08ECE19F4CBF10081D01F /* SetDeck.h */,
@@ -129,7 +130,6 @@
 				20B08EBD19F4CB110081D01F /* SetGame.m */,
 				20B08EBE19F4CB110081D01F /* SetGame2.h */,
 				20B08EBF19F4CB110081D01F /* SetGame2.m */,
-				20B08EC019F4CB110081D01F /* SetGameViewController.m */,
 				20B08EC119F4CB110081D01F /* SetPlayingCard.h */,
 				20B08EC219F4CB110081D01F /* SetPlayingCard.m */,
 				20B08EC319F4CB110081D01F /* SetPlayingCard2.h */,
