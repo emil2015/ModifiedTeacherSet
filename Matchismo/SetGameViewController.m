@@ -7,60 +7,33 @@
 //
 
 #import "SetGameViewController.h"
-#import "SetPlayingCardDeck.h"
-#import "SetGame2.h"
+#import "SetCardDeck.h"
+#import "SetMatchingGame.h"
+#import "SetCard.h"
 //#import "PlayingCardDeck.h"
 
 
 @interface SetGameViewController()
 
-@property (strong, nonatomic) SetDeck *deck;
-@property (strong, nonatomic) SetGame2 *game;
+@property (strong, nonatomic) SetCardDeck *deck;
+@property (strong, nonatomic) SetMatchingGame *game;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @end
 
 @implementation SetGameViewController
--(SetGame2 *)game{
+-(SetMatchingGame *)game{
     if (!_game) { NSLog(@"Game nil");
-        _game = [[SetGame2 alloc] initWithCardCount:[self.cardButtons count]
-                                         usingDeck:[self createDeck]];
+        _game = [[SetMatchingGame alloc] initWithCardCount:[self.cardButtons count]
+                                                 usingDeck:[self createDeck]];
     }
     return _game;
 }
 
--(SetPlayingCardDeck *)createDeck{
-    return [[SetPlayingCardDeck alloc] init];
+-(SetCardDeck *)createDeck{
+    NSLog(@"deck Made");
+    return [[SetCardDeck alloc] init];
 }
 
-/*
-@implementation SetGameViewController
--(SetGame *)game{
-    if (!_game) {
-        _game = [[SetGame alloc] initWithCardCount:[self.cardButtons count]
-                                         usingDeck:[self createDeck]];
-    }
-    return _game;
-}
-
--(SetDeck *)createDeck{
-    return [[SetPlayingCardDeck alloc] init];
-}
-*/
-/*
-- (SetGame *)game{
-    NSLog(@"init method called in view controller");
-    if (!_game) {NSLog(@"---------------------------");
-        _game = [[SetGame alloc] initWithCardCount:[self.cardButtons count]
-                                         usingDeck:[self createDeck]];
-    }
-    return _game;
-}
-
-- (SetDeck *)createDeck
-{
-    return [[SetPlayingCardDeck alloc] init];
-}
-*/
 
 //---------------
 - (IBAction)touchCardButton:(UIButton *)sender
@@ -76,6 +49,7 @@
 {
     //return card.isChosen ? card.contents : @"";
     return card.contents;
+    //return @"g";
 }
 
 - (void)updateUI

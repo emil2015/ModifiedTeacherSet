@@ -1,53 +1,29 @@
 //
-//  SetGame2.m
+//  SetMatchingGame.m
 //  Matchismo
 //
-//  Created by David Gross on 10/19/14.
+//  Created by David Gross on 10/21/14.
 //  Copyright (c) 2014 Lehman College. All rights reserved.
 //
 
-#import "SetGame2.h"
+#import "SetMatchingGame.h"
+#import "SetCard.h"
 
 
-
-@interface SetGame2()
-@property (nonatomic, readwrite) NSInteger score;
-@property (nonatomic, readwrite) NSInteger numberOfCardsToMatch;
+@interface  SetMatchingGame()
 @property (nonatomic, strong) NSMutableArray *cards; // of card
+@property (nonatomic, readwrite) NSInteger numberOfCardsToMatch;
+@property (nonatomic, readwrite) NSInteger score;
 @property (nonatomic, strong) NSMutableString *lastMatch;
 @property (nonatomic, strong) NSString *space;
 @end
 
-@implementation SetGame2
 
+@implementation SetMatchingGame
 
-- (NSMutableString *)lastMatch
-{
-    if (!_lastMatch) {
-        _lastMatch = [[NSMutableString alloc] init];
-    }
-    return _lastMatch;
-}
-
-- (NSMutableArray *)cards
-{
-    if (!_cards) {
-        _cards = [[NSMutableArray alloc] init];
-    }
-    return _cards;
-}
-
-- (NSString *)space
-{
-    if (!_space) {
-        _space = [NSString stringWithFormat:@" "];
-    }
-    return _space;
-}
-
-
-- (instancetype)initWithCardCount:(NSUInteger)count usingDeck:(SetDeck *)deck
-{
+- (instancetype)initWithCardCount:(NSUInteger)count
+                        usingDeck:(SetCardDeck *)deck{
+    
     self = [super init];
     
     if (self) {
@@ -57,41 +33,37 @@
         } // end if count
         
         for ( int i = 0 ; i < count ; i++ ) {
+            //I don't like that I am casting this
             SetCard *card = [deck drawRandomCard];
+            //NSLog(card.contents);
             if (card) {
                 [self.cards addObject:card];
             } else {
                 self = nil;
-                break;
+                //break;
             } // end if card
         } // end for i
     }
-    
-    self.numberOfCardsToMatch = 2;
-    
     return self;
 }
-
-- (instancetype)init
+//----
+- (SetCard *)cardAtIndex:(NSUInteger)index
 {
-    return nil;
+    return (index < [self.cards count]) ? self.cards[index] : nil;
 }
-
-- (void)matchTwoCards
+//--Helper methods
+- (NSMutableArray *)getListOfCardsWaitingForMatch
 {
-    self.numberOfCardsToMatch = 2;
-    NSLog(@"Number Of Cards To Match = %ld", (long) self.numberOfCardsToMatch);
-}
-
-- (void)matchThreeCards
-{
-    self.numberOfCardsToMatch = 3;
-    NSLog(@"Number Of Cards To Match = %ld", (long) self.numberOfCardsToMatch);
-}
-
-- (void)resetScore
-{
-    self.score = 0;
+    NSMutableArray *otherCards = [[NSMutableArray alloc] init];
+    
+    for (SetCard *otherCard in self.cards) {
+        if (otherCard.isChosen && !otherCard.isMatched) {
+            NSLog(@"Adding %@ Card to otherCards", otherCard.contents);
+            [otherCards addObject:otherCard];
+        } // end if otherCard.isChosen
+    } // end for Card *otherCard in self.cards
+    
+    return otherCards;
 }
 
 - (NSInteger)countOfChosenUnmatchedCards
@@ -109,47 +81,7 @@
     return count;
 }
 
-- (SetCard *)cardAtIndex:(NSUInteger)index
-{
-    return (index < [self.cards count]) ? self.cards[index] : nil;
-}
-
-- (NSMutableArray *)getListOfCardsWaitingForMatch
-{
-    NSMutableArray *otherCards = [[NSMutableArray alloc] init];
-    
-    for (SetCard *otherCard in self.cards) {
-        if (otherCard.isChosen && !otherCard.isMatched) {
-            NSLog(@"Adding %@ Card to otherCards", otherCard.contents);
-            [otherCards addObject:otherCard];
-        } // end if otherCard.isChosen
-    } // end for Card *otherCard in self.cards
-    
-    return otherCards;
-}
-
-- (NSString *)feedback
-{
-    NSMutableString * feedbackString = [[NSMutableString alloc] init];
-    
-    if ([self countOfChosenUnmatchedCards] != 0) {
-        // we are in the middle of matching
-        [feedbackString appendString:@"Matching: "];
-        for (SetCard *card in [self getListOfCardsWaitingForMatch]) {
-            [feedbackString appendString:card.contents];
-            [feedbackString appendString:self.space];
-        } // end for (Card *card in [self getListOfCardsWaitingForMatch])
-    } else {
-        // we either just got started or just completed a match
-        [feedbackString appendString:self.lastMatch];
-        self.lastMatch = Nil;
-    } // end if ([self countOfChosenUnmatchedCards] != 0)
-    
-    
-    return feedbackString;
-}
-
-
+//----
 static const int MISMATCH_PENALTY = 2;
 static const int MATCH_BONUS = 4;
 static const int COST_TO_CHOOSE = 1;
@@ -174,7 +106,7 @@ static const int COST_TO_CHOOSE = 1;
         // mark current card as chosen and take away cost of choosing
         NSLog(@"Not enough cards have been chosen");
         card.chosen = YES;
-        self.score -=COST_TO_CHOOSE;
+        self.score -= COST_TO_CHOOSE;
         return;
     } // end if [self countOfChosenCards] == self.numberOfCardsToMatch - 1
     
@@ -184,7 +116,7 @@ static const int COST_TO_CHOOSE = 1;
     if (matchScore) {
         self.score += matchScore * MATCH_BONUS;
         [self.lastMatch appendString:@"Matched: "];
-        for (SetCard *otherCard in otherCards) {
+        for (Card *otherCard in otherCards) {
             otherCard.matched = YES;
             [self.lastMatch appendString:otherCard.contents];
             [self.lastMatch appendString:self.space];
@@ -196,7 +128,7 @@ static const int COST_TO_CHOOSE = 1;
     } else {
         self.score -= MISMATCH_PENALTY;
         [self.lastMatch appendString:@"No Match: "];
-        for (SetCard *otherCard in otherCards) {
+        for (Card *otherCard in otherCards) {
             otherCard.chosen = NO;
             [self.lastMatch appendString:otherCard.contents];
             [self.lastMatch appendString:self.space];
@@ -210,5 +142,6 @@ static const int COST_TO_CHOOSE = 1;
     // take away cost of choosing
     self.score -=COST_TO_CHOOSE;
 }
+//-----
 
 @end
