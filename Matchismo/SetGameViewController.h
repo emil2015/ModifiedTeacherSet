@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "MatchCardsViewController.h"
-@interface SetGameViewController : MatchCardsViewController
 
+
+@interface SetGameViewController : MatchCardsViewController
+- (IBAction)returnedFromSegue:(UIStoryboardSegue *)segue;
 @end

@@ -10,6 +10,7 @@
 #import "SetCardDeck.h"
 #import "SetMatchingGame.h"
 #import "SetCard.h"
+#import "setHistoryViewController.h"
 //#import "PlayingCardDeck.h"
 
 
@@ -24,6 +25,12 @@
 @end
 
 @implementation SetGameViewController
+
+//--------------------------------------------------------------------
+- (IBAction)returnedFromSegue:(UIStoryboardSegue *)segue {
+    NSLog(@"Returned from second view");
+}
+//--------------------------------------------------------
 -(SetMatchingGame *)game{
     if (!_game) { NSLog(@"Game nil");
         _game = [[SetMatchingGame alloc] initWithCardCount:[self.cardButtons count]
@@ -35,6 +42,15 @@
 -(SetCardDeck *)createDeck{
     NSLog(@"deck Made");
     return [[SetCardDeck alloc] init];
+}
+
+//----Reset----
+
+- (IBAction)dealButton:(id)sender {
+    _game = [[SetMatchingGame alloc] initWithCardCount:[self.cardButtons count]
+                                              usingDeck:[self createDeck]];
+    [self.game resetScore];
+    [self updateUI];
 }
 
 
@@ -111,6 +127,8 @@
     //if ([self.game feedback] != nil) {
         self.matchFeebackLabel.text = [NSString stringWithFormat:@"%@", [self.game feedback]];
     //}
+    
+    
 }
 
 //---------------
