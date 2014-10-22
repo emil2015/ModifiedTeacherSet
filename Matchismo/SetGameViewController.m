@@ -48,8 +48,9 @@
 - (NSString *)titleForCard:(SetCard *)card
 {
     //return card.isChosen ? card.contents : @"";
-    return card.contents;
+    //return card.contents;
     //return @"g";
+    return card.aString; //This works, now I need to make it a string with attributes
 }
 
 - (void)updateUI

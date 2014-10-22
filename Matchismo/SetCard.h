@@ -23,4 +23,6 @@
 
 @property (strong, nonatomic) NSString *contents;
 
+- (NSString *)aString;
+
 @end

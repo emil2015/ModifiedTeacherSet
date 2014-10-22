@@ -10,10 +10,11 @@
 //#import "Deck.h"
 #import "SetCard.h"
 
-@interface SetCardDeck : NSObject
+@interface SetCardDeck : SetCard
 
-//- (instancetype)init;
-
+- (instancetype)init;
+- (void)addCard:(SetCard *)card atTop:(BOOL)atTop;
+- (void)addCard:(SetCard *)card;
 
 - (SetCard *)drawRandomCard;
 

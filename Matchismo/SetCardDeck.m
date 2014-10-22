@@ -20,6 +20,11 @@
 
 
 //----
+- (NSMutableArray *)cards
+{
+    if (!_cards) _cards = [[NSMutableArray alloc] init];
+    return _cards;
+}
 
 
 - (instancetype)init
@@ -28,14 +33,14 @@
     if (self) {
         for (NSString *shape in [SetCard shapeArray]) {
             for (UIColor *color in [SetCard colorArray]) {
-                for (int count; count <= 3; count++) {
+                for (int count = 0; count <= 3; count++) {
                     for (float alpha = 0; alpha <= 1; alpha += .5) {
                         SetCard *card = [[SetCard alloc] init];
                         card.shape = shape;
                         card.color = color;
                         card.count = count;
                         card.alpha = alpha;
-                        [self addCard:card atTop:YES];
+                        [self addCard:card];
                         NSLog(@"card made");
                         //NSLog(@"shape %d", card.shape);
                         //NSLog(@"color %d", card.color);
@@ -47,6 +52,7 @@
         }
     }
     return self;
+
 }
 
 - (SetCard *)drawRandomCard{
@@ -58,6 +64,7 @@
         [self.cards removeObjectAtIndex:index];
     }
     return randomCard;
+    
 }
 
 - (void)addCard:(SetCard *)card atTop:(BOOL)atTop

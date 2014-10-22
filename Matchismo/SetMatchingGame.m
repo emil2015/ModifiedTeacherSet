@@ -21,6 +21,12 @@
 
 @implementation SetMatchingGame
 
+- (NSMutableArray *)cards
+{
+    if (!_cards) _cards = [[NSMutableArray alloc] init];
+    return _cards;
+}
+
 - (instancetype)initWithCardCount:(NSUInteger)count
                         usingDeck:(SetCardDeck *)deck{
     
@@ -29,15 +35,16 @@
     if (self) {
         if (count < 2) {
             self = nil;
+            NSLog(@"count less than 2");
             return self;
         } // end if count
         
         for ( int i = 0 ; i < count ; i++ ) {
             //I don't like that I am casting this
             SetCard *card = [deck drawRandomCard];
-            //NSLog(card.contents);
-            if (card) {
-                [self.cards addObject:card];
+            NSLog(@"loop");
+            if (card) {NSLog(@"Is card");
+                [self.cards addObject:card]; //not getting added
             } else {
                 self = nil;
                 //break;

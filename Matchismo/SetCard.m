@@ -38,6 +38,10 @@
 }
  */
 
+- (NSString *)aString{
+    return @"z";
+}
+
 - (NSString *)contents
 {
     /*
@@ -76,7 +80,8 @@
     NSLog(outPut);
     //return (NSString *)title;
      */
-    return @"H";
+    NSString *myStrings = @"h";
+    return myStrings;
 }
 
 
@@ -106,14 +111,14 @@
         _color = color;
     }
 }
-
+@synthesize alpha = _alpha;
 - (void)setAlpha:(float)alpha{
     if (alpha <= 1) {
     //if ([[SetCard alphaArray] containsObject:alpha]){
         _alpha = alpha;
     }
 }
-
+@synthesize count = _count;
 - (void)setCount:(NSUInteger)count{
     if(count <= 3){
         _count = count;
