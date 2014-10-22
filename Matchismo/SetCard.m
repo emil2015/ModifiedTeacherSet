@@ -9,34 +9,30 @@
 #import "SetCard.h"
 
 @implementation SetCard
-/*
-- (int)match:(NSArray *)otherCards
-{
-    int score = 0;
-    
-    NSMutableArray *cards = [NSMutableArray arrayWithArray:otherCards];
-    [cards addObject:self];
-    
-    NSMutableSet *symbols   = [[NSMutableSet alloc] init];
-    NSMutableSet *colors    = [[NSMutableSet alloc] init];
-    NSMutableSet *numbers   = [[NSMutableSet alloc] init];
-    NSMutableSet *shadings  = [[NSMutableSet alloc] init];
-    
-    for (SetCard *otherCard in cards) {
-        [symbols    addObject:@(otherCard.symbol)];
-        [colors     addObject:@(otherCard.color)];
-        [shadings   addObject:@(otherCard.shading)];
-        [numbers    addObject:@(otherCard.number)];
-    }
-    
-    if (((symbols.count == 1)   || (symbols.count == 3)) &&
-        ((colors.count == 1)    || (colors.count == 3)) &&
-        ((numbers.count == 1)   || (numbers.count == 3)) &&
-        ((shadings.count == 1)  || (shadings.count == 3))) score = MATCH_POINTS;
-    
-    return score;
+
+- (int)match:(NSArray *)otherCards{
+    if ([otherCards count] == 3) {
+        SetCard *first  = [otherCards objectAtIndex:0];
+        SetCard *second = [otherCards objectAtIndex:1];
+        SetCard *third = [otherCards objectAtIndex:2];
+        
+        if  (
+            ((first.shape == second.shape && second.shape == third.shape) || (first.shape != second.shape && second.shape != third.shape && third.shape != first.shape)) &&
+             
+            ((first.count == second.count && second.count == third.count) || (first.count != second.count && second.count != third.count && third.count != first.count)) &&
+             
+            ((first.alpha == second.alpha && second.alpha == third.alpha) || (first.alpha != second.alpha && second.alpha != third.alpha && third.alpha != first.alpha)) &&
+            
+            ((first.color == second.color && second.color == third.color) || (first.color != second.color && second.color != third.color && third.color != first.color))) {
+            NSLog(@"matched");
+            return 10;
+        }else
+            NSLog(@"tried but not mateched");
+            return 0;
+    }else
+        return 0;
 }
- */
+
 
 - (NSString *)aString{
     //return @"z";
@@ -59,48 +55,6 @@
     return [title string];
 }
 
-- (NSString *)contents
-{
-    /*
-     NSArray *rankStrings = [PlayingCard rankStrings];
-     return [rankStrings[self.rank] stringByAppendingString:self.suit];
-     */
-    /*
-    NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:@"●"];
-    
-    UIColor *foregroundColor = [UIColor redColor];
-    UIColor *strokeColor = [foregroundColor copy];
-    foregroundColor = [foregroundColor colorWithAlphaComponent:1];
-    
-    [title setAttributes:@{NSForegroundColorAttributeName:foregroundColor,
-                           NSStrokeWidthAttributeName:@-5,
-                           NSStrokeColorAttributeName:strokeColor}
-                   range:NSMakeRange(0, [title length])];
-    //[self.solidRedButton setAttributedTitle:title forState:UIControlStateNormal];
-    return (NSString *)title;
-     */
-    
-    
-    NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:self.shape];
-    
-    UIColor *foregroundColor = [UIColor redColor];
-    UIColor *strokeColor = [foregroundColor copy];
-    foregroundColor = [foregroundColor colorWithAlphaComponent:1];
-    
-    [title setAttributes:@{NSForegroundColorAttributeName:foregroundColor,
-                           NSStrokeWidthAttributeName:@-5,
-                           NSStrokeColorAttributeName:strokeColor}
-                   range:NSMakeRange(0, [title length])];
-    //[self.solidRedButton setAttributedTitle:title forState:UIControlStateNormal];
-    NSString *outPut = (NSString *)title;
-    NSLog(@"Should be thingy");
-    //NSLog(outPut);
-    return title;
-    //return (NSString *)title;
-     
-    //NSString *myStrings = @"h";
-    //return myStrings;
-}
 
 
 + (NSArray *)shapeArray{

@@ -70,6 +70,11 @@
     //return card.aString; //This works, now I need to make it a string with attributes
 }
 
+- (UIImage *)imageForCard:(SetCard *)card
+{
+    return [UIImage imageNamed:card.isChosen ? @"selectedCardFront" : @"cardFront"];
+}
+
 - (void)updateUI
 {NSLog(@"updateUI called");
     for (UIButton *cardButton in self.cardButtons) {
@@ -90,6 +95,9 @@
         
         cardButton.enabled = !card.matched;
         
+            [cardButton setBackgroundImage:[self imageForCard:card] forState:UIControlStateNormal];
+        
+
     } // end for cardButton
     //self.scoreLabel.text = [NSString stringWithFormat:@"Score: %ld", self.game.score];
     //self.matchFeebackLabel.text = [NSString stringWithFormat:@"%@", [self.game feedback]];

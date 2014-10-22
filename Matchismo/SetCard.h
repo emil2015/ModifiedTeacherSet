@@ -25,4 +25,6 @@
 
 - (NSString *)aString;
 
+- (int)match:(NSArray *)otherCards;
+
 @end

@@ -97,7 +97,7 @@ static const int COST_TO_CHOOSE = 1;
 {
     SetCard *card = [self cardAtIndex:index];
     NSMutableArray *otherCards;
-    
+    self.numberOfCardsToMatch = 3;
     // are we just flipping the card back down?
     if (!card.isMatched) {
         if (card.isChosen) {
@@ -107,7 +107,7 @@ static const int COST_TO_CHOOSE = 1;
     } // end if !card.isMatched
     
     // enough cards chosen? then create an array of cards to match
-    if ([self countOfChosenUnmatchedCards] == self.numberOfCardsToMatch - 1) {
+    if ([self countOfChosenUnmatchedCards] == self.numberOfCardsToMatch -1) {
         otherCards = [self getListOfCardsWaitingForMatch];
     } else {
         // mark current card as chosen and take away cost of choosing
@@ -148,7 +148,6 @@ static const int COST_TO_CHOOSE = 1;
     
     // take away cost of choosing
     self.score -=COST_TO_CHOOSE;
+    NSLog(@"%d",self.score);
 }
-//-----
-
 @end
