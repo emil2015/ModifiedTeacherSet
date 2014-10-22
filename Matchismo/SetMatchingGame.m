@@ -108,6 +108,7 @@ static const int COST_TO_CHOOSE = 1;
     
     // enough cards chosen? then create an array of cards to match
     if ([self countOfChosenUnmatchedCards] == self.numberOfCardsToMatch -1) {
+        card.chosen = YES;
         otherCards = [self getListOfCardsWaitingForMatch];
     } else {
         // mark current card as chosen and take away cost of choosing
