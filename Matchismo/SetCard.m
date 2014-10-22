@@ -40,6 +40,22 @@
 
 - (NSString *)aString{
     return @"z";
+    /*
+    NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:self.shape];
+    
+    UIColor *foregroundColor = [UIColor redColor];
+    UIColor *strokeColor = [foregroundColor copy];
+    foregroundColor = [foregroundColor colorWithAlphaComponent:1];
+    
+    [title setAttributes:@{NSForegroundColorAttributeName:foregroundColor,
+                           NSStrokeWidthAttributeName:@-5,
+                           NSStrokeColorAttributeName:strokeColor}
+                   range:NSMakeRange(0, [title length])];
+    //[self.solidRedButton setAttributedTitle:title forState:UIControlStateNormal];
+    NSString *outPut = (NSString *)title;
+    NSLog(@"Should be thingy");
+    //NSLog(outPut);
+    return title;*/
 }
 
 - (NSString *)contents
@@ -63,7 +79,7 @@
     return (NSString *)title;
      */
     
-    /*
+    
     NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:self.shape];
     
     UIColor *foregroundColor = [UIColor redColor];
@@ -77,11 +93,12 @@
     //[self.solidRedButton setAttributedTitle:title forState:UIControlStateNormal];
     NSString *outPut = (NSString *)title;
     NSLog(@"Should be thingy");
-    NSLog(outPut);
+    //NSLog(outPut);
+    return title;
     //return (NSString *)title;
-     */
-    NSString *myStrings = @"h";
-    return myStrings;
+     
+    //NSString *myStrings = @"h";
+    //return myStrings;
 }
 
 
