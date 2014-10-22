@@ -122,7 +122,7 @@
     } // end for cardButton
     //self.scoreLabel.text = [NSString stringWithFormat:@"Score: %ld", self.game.score];
     //self.matchFeebackLabel.text = [NSString stringWithFormat:@"%@", [self.game feedback]];
-    self.scoreLabel.text = [NSString stringWithFormat:@"Score: %ld", self.game.score];
+    self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
     //This is what is currently broken
     //if ([self.game feedback] != nil) {
         self.matchFeebackLabel.text = [NSString stringWithFormat:@"%@", [self.game feedback]];

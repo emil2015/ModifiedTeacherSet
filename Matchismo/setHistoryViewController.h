@@ -13,7 +13,7 @@
 @protocol SecondViewControllerDelegate
 
 -(void) updateLabelWithString:(NSString*)string;
-
+@property (strong, nonatomic) IBOutlet UILabel *historyLabel;
 @end
 
 

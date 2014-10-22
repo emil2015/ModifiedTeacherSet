@@ -195,6 +195,7 @@ static const int COST_TO_CHOOSE = 1;
         [feedbackString appendString:self.lastMatch];
         self.lastMatch = Nil;
     } // end if ([self countOfChosenUnmatchedCards] != 0)
+    NSLog(@"%@", feedbackString);
     return feedbackString;
      
     

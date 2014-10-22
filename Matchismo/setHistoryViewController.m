@@ -9,7 +9,7 @@
 #import "setHistoryViewController.h"
 
 @interface setHistoryViewController ()
-@property (weak, nonatomic) IBOutlet UILabel *historyLabel;
+@property (strong, nonatomic) IBOutlet UILabel *historyLabel;
 
 @end
 
