@@ -39,6 +39,9 @@
                         card.shape = shape;
                         card.color = color;
                         card.count = count;
+                        if(alpha == .5) alpha = .3; else{
+                        if(alpha > .3 && alpha < 1) alpha = 1;
+                        }
                         card.alpha = alpha;
                         [self addCard:card];
                         NSLog(@"card made");

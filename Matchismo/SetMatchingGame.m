@@ -152,7 +152,7 @@ static const int COST_TO_CHOOSE = 1;
             [self.lastMatch appendString:otherCard.contents];
             [self.lastMatch appendString:self.space];
         } // end for (Card *otherCard in otherCards)
-        [self.lastMatch appendString:card.contents];
+        //[self.lastMatch appendString:card.contents];
         [self.lastMatch appendFormat:@" for %d points", matchScore * MATCH_BONUS];
         card.chosen = YES;
         card.matched = YES;
@@ -164,7 +164,7 @@ static const int COST_TO_CHOOSE = 1;
             [self.lastMatch appendString:otherCard.contents];
             [self.lastMatch appendString:self.space];
         } // end for (Card *otherCard in otherCards)
-        [self.lastMatch appendString:card.contents];
+        //[self.lastMatch appendString:card.contents];
         [self.lastMatch appendFormat:@" %d points penalty", MISMATCH_PENALTY];
         card.chosen = NO;
         card.matched = NO;
@@ -193,6 +193,9 @@ static const int COST_TO_CHOOSE = 1;
     } else {
         // we either just got started or just completed a match
         [feedbackString appendString:self.lastMatch];
+        //--
+        
+        //--
         self.lastMatch = Nil;
     } // end if ([self countOfChosenUnmatchedCards] != 0)
     NSLog(@"%@", feedbackString);

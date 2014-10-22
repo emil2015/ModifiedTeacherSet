@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--Match Cards View Controller - Item-->
+        <!--Match Cards View Controller - Playing Cards-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="MatchCardsViewController" sceneMemberID="viewController">
@@ -402,7 +402,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="82G-hp-EcZ"/>
+                    <tabBarItem key="tabBarItem" title="Playing Cards" id="82G-hp-EcZ"/>
                     <connections>
                         <outlet property="cardMatchSlider" destination="rfB-BZ-1Oc" id="vH4-al-Gms"/>
                         <outlet property="matchFeebackLabel" destination="sXe-gU-sU5" id="2he-kw-Doy"/>
@@ -474,7 +474,7 @@
             </objects>
             <point key="canvasLocation" x="2042" y="229"/>
         </scene>
-        <!--Set Game View Controller - Item 1-->
+        <!--Set Game View Controller - Set Cards-->
         <scene sceneID="mct-bZ-Qa7">
             <objects>
                 <viewController id="Dll-6y-wgD" customClass="SetGameViewController" sceneMemberID="viewController">
@@ -921,7 +921,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" id="cTn-eO-luX"/>
+                    <tabBarItem key="tabBarItem" title="Set Cards" id="cTn-eO-luX"/>
                     <connections>
                         <outlet property="matchFeebackLabel" destination="6kF-s4-rh6" id="44a-FO-fKg"/>
                         <outlet property="scoreLabel" destination="drq-7Y-0yL" id="f2Q-Xl-DE5"/>
@@ -1022,7 +1022,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="wGA-bg-4VQ">
             <objects>
-                <tabBarController definesPresentationContext="YES" id="F7z-YS-Stu" sceneMemberID="viewController">
+                <tabBarController restorationIdentifier=",msdnf" definesPresentationContext="YES" id="F7z-YS-Stu" sceneMemberID="viewController">
                     <keyCommands/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="ipJ-Ec-Qbk">

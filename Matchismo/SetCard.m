@@ -33,10 +33,30 @@
         return 0;
 }
 
+- (NSString *)contents{
+    NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:self.shape];
+    
+    UIColor *foregroundColor = [UIColor redColor];
+    UIColor *strokeColor = [foregroundColor copy];
+    foregroundColor = [foregroundColor colorWithAlphaComponent:1];
+    
+    [title setAttributes:@{NSForegroundColorAttributeName:foregroundColor,
+                           NSStrokeWidthAttributeName:@-5,
+                           NSStrokeColorAttributeName:strokeColor}
+                   range:NSMakeRange(0, [title length])];
+    NSMutableAttributedString *temp = title.copy;
+    for (int i = 1; i < self.count; i++) {
+        [title appendAttributedString:temp.copy];
+    }
+    
+    
+    return [title string];
+}
+
 
 - (NSString *)aString{
     //return @"z";
-    
+    /*
     NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:self.shape];
     
     UIColor *foregroundColor = [UIColor redColor];
@@ -53,6 +73,8 @@
     //NSLog(outPut);
     
     return [title string];
+     */
+    return [self contents];
 }
 
 
@@ -97,25 +119,7 @@
     }
 }
 
-- (NSString *)contents{
-    NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:self.shape];
-    
-    UIColor *foregroundColor = [UIColor redColor];
-    UIColor *strokeColor = [foregroundColor copy];
-    foregroundColor = [foregroundColor colorWithAlphaComponent:1];
-    
-    [title setAttributes:@{NSForegroundColorAttributeName:foregroundColor,
-                           NSStrokeWidthAttributeName:@-5,
-                           NSStrokeColorAttributeName:strokeColor}
-                   range:NSMakeRange(0, [title length])];
-    NSMutableAttributedString *temp = title.copy;
-    for (int i = 1; i < self.count; i++) {
-        [title appendAttributedString:temp.copy];
-    }
-    
-    
-    return [title string];
-}
+
 
 
 @end

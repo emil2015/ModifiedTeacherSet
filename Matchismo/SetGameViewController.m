@@ -69,7 +69,8 @@
     //return card.isChosen ? card.contents : @"";
     //return card.contents;
     //return @"g";
-    
+    //------
+    /*
     NSString *first = card.shape;
     if (card.count == 2) {
         return [first stringByAppendingString:first];
@@ -78,7 +79,8 @@
         return [[first stringByAppendingString:first] stringByAppendingString:first];
     }else
         return first;
-    
+     */
+    //-------
     /*
     for (int i = 1; i < card.count; i++) {
         [result appendString:card.shape.copy];
@@ -87,10 +89,14 @@
     //for loop to determin the number of items.
     
     //return card.aString; //This works, now I need to make it a string with attributes
+    return card.contents;
 }
 
-- (UIImage *)imageForCard:(SetCard *)card
-{
+- (UIImage *)imageForCard:(SetCard *)card{
+    
+    if (card.matched) {
+            return [UIImage imageNamed:!card.isChosen ? @"selectedCardFront" : @"cardFront"];
+    }else
     return [UIImage imageNamed:card.isChosen ? @"selectedCardFront" : @"cardFront"];
 }
 
@@ -102,6 +108,7 @@
         SetCard *card = [self.game cardAtIndex:cardIndex];
         [cardButton setTitle:[self titleForCard:card] forState:UIControlStateNormal];
         
+        
         NSMutableAttributedString *title;
         title = [[NSMutableAttributedString alloc] initWithString:[self titleForCard:card]];
         
@@ -111,7 +118,9 @@
                                NSStrokeColorAttributeName:card.color}
                        range:NSMakeRange(0, [title length])];
         [cardButton setAttributedTitle:title forState:UIControlStateNormal];
-        
+         
+        //[cardButton setAttributedTitle:card.contents forState:UIControlStateNormal];
+
         cardButton.enabled = !card.matched;
         
             [cardButton setBackgroundImage:[self imageForCard:card] forState:UIControlStateNormal];
