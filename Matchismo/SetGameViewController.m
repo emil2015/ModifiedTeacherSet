@@ -100,16 +100,17 @@
         
             [cardButton setBackgroundImage:[self imageForCard:card] forState:UIControlStateNormal];
         
-        self.scoreLabel.text = [NSString stringWithFormat:@"Score: %ld", self.game.score];
-        //This is what is currently broken
-        //if ([self.game feedback] != nil) {
-                self.matchFeebackLabel.text = [NSString stringWithFormat:@"%@", [self.game feedback]];
-        //}
+        
         
 
     } // end for cardButton
     //self.scoreLabel.text = [NSString stringWithFormat:@"Score: %ld", self.game.score];
     //self.matchFeebackLabel.text = [NSString stringWithFormat:@"%@", [self.game feedback]];
+    self.scoreLabel.text = [NSString stringWithFormat:@"Score: %ld", self.game.score];
+    //This is what is currently broken
+    //if ([self.game feedback] != nil) {
+        self.matchFeebackLabel.text = [NSString stringWithFormat:@"%@", [self.game feedback]];
+    //}
 }
 
 //---------------
