@@ -50,7 +50,24 @@
     //return card.isChosen ? card.contents : @"";
     //return card.contents;
     //return @"g";
-    return card.aString; //This works, now I need to make it a string with attributes
+    
+    NSString *first = card.shape;
+    if (card.count == 2) {
+        return [first stringByAppendingString:first];
+    }else
+    if (card.count == 3) {
+        return [[first stringByAppendingString:first] stringByAppendingString:first];
+    }else
+        return first;
+    
+    /*
+    for (int i = 1; i < card.count; i++) {
+        [result appendString:card.shape.copy];
+    }*/
+    
+    //for loop to determin the number of items.
+    
+    //return card.aString; //This works, now I need to make it a string with attributes
 }
 
 - (void)updateUI
@@ -61,7 +78,15 @@
         SetCard *card = [self.game cardAtIndex:cardIndex];
         [cardButton setTitle:[self titleForCard:card] forState:UIControlStateNormal];
         
-        //[cardButton setBackgroundImage:[self imageForCard:card] forState:UIControlStateNormal];
+        NSMutableAttributedString *title;
+        title = [[NSMutableAttributedString alloc] initWithString:[self titleForCard:card]];
+        
+     
+        [title setAttributes:@{NSForegroundColorAttributeName:[card.color colorWithAlphaComponent:card.alpha],
+                               NSStrokeWidthAttributeName:@-5,
+                               NSStrokeColorAttributeName:card.color}
+                       range:NSMakeRange(0, [title length])];
+        [cardButton setAttributedTitle:title forState:UIControlStateNormal];
         
         cardButton.enabled = !card.matched;
         
@@ -74,3 +99,32 @@
 
 
 @end
+
+/*
+ - (void)updateUI
+ {NSLog(@"updateUI called");
+ for (UIButton *cardButton in self.cardButtons) {
+ 
+ NSUInteger cardIndex = [self.cardButtons indexOfObject:cardButton];
+ SetCard *card = [self.game cardAtIndex:cardIndex];
+ 
+ [cardButton setTitle:[self titleForCard:card] forState:UIControlStateNormal];
+ [cardButton setTitleColor:card.color forState:UIControlStateNormal];
+ //[cardButton.titleLabel setAlpha:card.alpha];
+ *
+ [cardButton setTitleColor:[UIColor colorWithRed:0.3 green:0.6 blue:0.9 alpha:0.5]
+ //                                set 'alpha' to something less than 1. -----^^^
+ forState:UIControlStateNormal];
+ *
+
+
+
+//[cardButton setBackgroundImage:[self imageForCard:card] forState:UIControlStateNormal];
+
+cardButton.enabled = !card.matched;
+
+} // end for cardButton
+//self.scoreLabel.text = [NSString stringWithFormat:@"Score: %ld", self.game.score];
+//self.matchFeebackLabel.text = [NSString stringWithFormat:@"%@", [self.game feedback]];
+}
+*/

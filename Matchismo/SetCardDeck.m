@@ -33,7 +33,7 @@
     if (self) {
         for (NSString *shape in [SetCard shapeArray]) {
             for (UIColor *color in [SetCard colorArray]) {
-                for (int count = 0; count <= 3; count++) {
+                for (int count = 1; count <= 3; count++) {
                     for (float alpha = 0; alpha <= 1; alpha += .5) {
                         SetCard *card = [[SetCard alloc] init];
                         card.shape = shape;
