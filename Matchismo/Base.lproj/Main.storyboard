@@ -845,11 +845,25 @@
                                     <action selector="touchCardButton:" destination="Dll-6y-wgD" eventType="touchUpInside" id="MkE-Ux-bJ1"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="drq-7Y-0yL">
+                                <rect key="frame" x="34" y="410" width="252" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6kF-s4-rh6">
+                                <rect key="frame" x="20" y="452" width="273" height="43"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 1" id="cTn-eO-luX"/>
                     <connections>
+                        <outlet property="matchFeebackLabel" destination="6kF-s4-rh6" id="44a-FO-fKg"/>
+                        <outlet property="scoreLabel" destination="drq-7Y-0yL" id="f2Q-Xl-DE5"/>
                         <outletCollection property="cardButtons" destination="Mmh-QM-aje" id="01Q-Ww-uRz"/>
                         <outletCollection property="cardButtons" destination="zQi-XJ-ePy" id="Z85-yI-TiE"/>
                         <outletCollection property="cardButtons" destination="61u-Zb-dF9" id="dTB-re-vr5"/>

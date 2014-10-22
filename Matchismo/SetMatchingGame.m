@@ -21,10 +21,33 @@
 
 @implementation SetMatchingGame
 
+- (NSString *)space
+{
+    if (!_space) {
+        _space = [NSString stringWithFormat:@" "];
+    }
+    return _space;
+}
+
+- (NSMutableString *)lastMatch
+{
+    if (!_lastMatch) {
+        _lastMatch = [[NSMutableString alloc] init];
+    }
+    return _lastMatch;
+}
+
+
+
 - (NSMutableArray *)cards
 {
     if (!_cards) _cards = [[NSMutableArray alloc] init];
     return _cards;
+}
+
+- (void)resetScore
+{
+    self.score = 0;
 }
 
 - (instancetype)initWithCardCount:(NSUInteger)count
@@ -118,7 +141,7 @@ static const int COST_TO_CHOOSE = 1;
         return;
     } // end if [self countOfChosenCards] == self.numberOfCardsToMatch - 1
     
-    NSLog(@"Count of cards in otherCards = %ld", [otherCards count]);
+    //NSLog(@"Count of cards in otherCards = %ld", [otherCards count]);
     
     int matchScore = [card match:otherCards];
     if (matchScore) {
@@ -151,4 +174,32 @@ static const int COST_TO_CHOOSE = 1;
     self.score -=COST_TO_CHOOSE;
     NSLog(@"%d",self.score);
 }
+//---Feedback stuff----
+
+
+
+- (NSString *)feedback
+{
+    
+    NSMutableString *feedbackString = [[NSMutableString alloc] init];
+    
+    if ([self countOfChosenUnmatchedCards] != 0) {
+        // we are in the middle of matching
+        [feedbackString appendString:@"Matching: "];
+        for (SetCard *card in [self getListOfCardsWaitingForMatch]) {
+            [feedbackString appendString:card.contents];
+            [feedbackString appendString:self.space];
+        } // end for (Card *card in [self getListOfCardsWaitingForMatch])
+    } else {
+        // we either just got started or just completed a match
+        [feedbackString appendString:self.lastMatch];
+        self.lastMatch = Nil;
+    } // end if ([self countOfChosenUnmatchedCards] != 0)
+    return feedbackString;
+     
+    
+}
+
+
+
 @end

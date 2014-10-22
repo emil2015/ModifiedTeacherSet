@@ -18,12 +18,12 @@
 
 - (SetCard *)cardAtIndex:(NSUInteger)index;
 
-//- (void)resetScore;
+- (void)resetScore;
 
 //- (void)matchTwoCards;
 //- (void)matchThreeCards;
 
-//- (NSString *)feedback;
+- (NSString *)feedback;
 
 @property (nonatomic, readonly) NSInteger score;
 @property (nonatomic, readonly) NSInteger numberOfCardsToMatch;

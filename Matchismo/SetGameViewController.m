@@ -18,6 +18,9 @@
 @property (strong, nonatomic) SetCardDeck *deck;
 @property (strong, nonatomic) SetMatchingGame *game;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
+@property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
+@property (weak, nonatomic) IBOutlet UILabel *matchFeebackLabel;
+
 @end
 
 @implementation SetGameViewController
@@ -96,6 +99,12 @@
         cardButton.enabled = !card.matched;
         
             [cardButton setBackgroundImage:[self imageForCard:card] forState:UIControlStateNormal];
+        
+        self.scoreLabel.text = [NSString stringWithFormat:@"Score: %ld", self.game.score];
+        //This is what is currently broken
+        //if ([self.game feedback] != nil) {
+                self.matchFeebackLabel.text = [NSString stringWithFormat:@"%@", [self.game feedback]];
+        //}
         
 
     } // end for cardButton
