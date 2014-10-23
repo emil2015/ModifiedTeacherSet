@@ -155,23 +155,25 @@ static const int COST_TO_CHOOSE = 1;
         [self.lastMatch appendString:@"Matched: "];
         
         
-                                                                    //NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:@"Matched: "];
-                                                                    //[self.lastMatchA appendAttributedString:title];
+                                                                    NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:@"Matched: "];
+                                                                    [self.lastMatchA appendAttributedString:title];
         
         for (SetCard *otherCard in otherCards) {
             otherCard.matched = YES;
             [self.lastMatch appendString:otherCard.contents];
-                                                                    //[self.lastMatchA appendAttributedString:otherCard.contents2];
+                                                                    [self.lastMatchA appendAttributedString:[otherCard contentsWithAttributes]];
             [self.lastMatch appendString:self.space];
-                                                                    //[self.lastMatchA appendAttributedString:otherCard.contents2];
+                                                                    [self.lastMatchA appendAttributedString:[otherCard contentsWithAttributes]];
         } // end for (Card *otherCard in otherCards)
         //[self.lastMatch appendString:card.contents];
         [self.lastMatch appendFormat:@" for %d points", matchScore * MATCH_BONUS];
         //===
-                                    //NSMutableString *temp;
-                                    //[temp appendFormat:@" for %d points", matchScore * MATCH_BONUS];
-                                    //NSMutableAttributedString *title2 = [[NSMutableAttributedString alloc] initWithString:temp];
-                                    //[self.lastMatchA appendAttributedString:title2];
+        
+                                                                    //NSMutableString *temp;
+                                                                    //[temp appendFormat:@" for %d points", matchScore * MATCH_BONUS];
+        
+                                                                    //NSMutableAttributedString *title2 = [[NSMutableAttributedString alloc] initWithString:temp];
+                                                                    //[self.lastMatchA appendAttributedString:title2];
         //====
         card.chosen = YES;
         card.matched = YES;
@@ -223,25 +225,29 @@ static const int COST_TO_CHOOSE = 1;
     
 }
 
-- (NSString *)feedback2
+- (NSAttributedString *)feedback2
 {
     
-    NSMutableString *feedbackString = [[NSMutableString alloc] init];
+    NSMutableAttributedString *feedbackString = [[NSMutableAttributedString alloc] init];
     
     if ([self countOfChosenUnmatchedCards] != 0) {
         // we are in the middle of matching
-        [feedbackString appendString:@"Matching: "];
+        //[feedbackString appendString:@"Matching: "];
+        [feedbackString appendAttributedString:[[NSAttributedString alloc] initWithString:@"Matching: "]];
         for (SetCard *card in [self getListOfCardsWaitingForMatch]) {
-            [feedbackString appendString:card.contents];
-            [feedbackString appendString:self.space];
+            //[feedbackString appendString:card.contents];
+            [feedbackString appendAttributedString:card.contents2];
+            //[feedbackString appendString:self.space];
+            [feedbackString appendAttributedString:card.contents2];
         } // end for (Card *card in [self getListOfCardsWaitingForMatch])
     } else {
         // we either just got started or just completed a match
-        [feedbackString appendString:self.lastMatch];
+        //[feedbackString appendString:self.lastMatch];
+        [feedbackString appendAttributedString:self.lastMatchA];
         //--
         
         //--
-        self.lastMatch = Nil;
+        self.lastMatchA = Nil;
     } // end if ([self countOfChosenUnmatchedCards] != 0)
     NSLog(@"%@", feedbackString);
     return feedbackString;

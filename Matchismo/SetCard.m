@@ -53,7 +53,7 @@
     return [title string];
 }
 
-- (void)contentsWithAttributes{
+- (NSMutableAttributedString *)contentsWithAttributes{
     NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:self.shape];
     
     UIColor *foregroundColor = [UIColor redColor];
@@ -69,7 +69,8 @@
         [title appendAttributedString:temp.copy];
     }
     
-    self.contents2 = title;
+    //self.contents2 = title;
+    return title;
 
 }
 

@@ -193,7 +193,13 @@
     self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
     //This is what is currently broken
     //if ([self.game feedback] != nil) {
+    
+    
+    //====
         self.matchFeebackLabel.text = [NSString stringWithFormat:@"%@", [self.game feedback]];
+    //====
+    //self.matchFeebackLabel.text = [NSAttributedString stringWithFormat:@"%@", [self.game feedback2]];
+    //self.matchFeebackLabel.text = [[self.game feedback2] string];
     
     //[self.statusHistory addObject:[self.game feedback]];
     [self.statusHistory addObject:self.matchFeebackLabel.text];

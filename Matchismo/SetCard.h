@@ -29,4 +29,6 @@
 
 - (int)match:(NSArray *)otherCards;
 
+- (NSMutableAttributedString *)contentsWithAttributes;
+
 @end
