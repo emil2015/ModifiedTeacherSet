@@ -9,6 +9,7 @@
 #import "MatchCardsViewController.h"
 #import "PlayingCardDeck.h"
 #import "CardMatchingGame.h"
+#import "matchHistoryViewController.h"
 
 @interface MatchCardsViewController ()
 @property (strong, nonatomic) Deck *deck;
@@ -17,9 +18,62 @@
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UILabel *matchFeebackLabel;
 @property (weak, nonatomic) IBOutlet UISwitch *cardMatchSlider;
+//=======
+@property (strong, nonatomic) NSMutableArray *statusHistory;
 @end
 
 @implementation MatchCardsViewController
+
+//=========Segue stuff
+- (NSMutableArray *)statusHistory
+{
+    if (!_statusHistory) _statusHistory = [[NSMutableArray alloc] init];
+    return _statusHistory;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"e"]) {
+        if ([segue.destinationViewController isKindOfClass:[matchHistoryViewController class]]) {
+            matchHistoryViewController *tsvc = (matchHistoryViewController *) segue.destinationViewController;
+            //tsvc.statusHistory = self.statusHistory;
+            
+            NSMutableString *temp = [[NSMutableString alloc] initWithString:@""];
+            for (NSMutableString *aString in self.statusHistory) {
+                [temp appendString:aString];
+                [temp appendString:[[NSMutableString alloc] initWithString:@"\n"]];
+            }
+            tsvc.statusString = temp;
+            
+        }
+    }
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    // Do any additional setup after loading the view, typically from a nib.
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+}
+
+- (IBAction)returnedFromSegue:(UIStoryboardSegue *)segue {
+    NSLog(@"Returned from second view");
+}
+//==================
+
+
 
 - (CardMatchingGame *)game
 {
@@ -78,6 +132,8 @@
     } // end for cardButton
     self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
     self.matchFeebackLabel.text = [NSString stringWithFormat:@"%@", [self.game feedback]];
+    
+    [self.statusHistory addObject:self.matchFeebackLabel.text];
 }
 
 - (NSString *)titleForCard:(Card *)card

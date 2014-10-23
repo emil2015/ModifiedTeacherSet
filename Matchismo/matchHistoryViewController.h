@@ -9,5 +9,5 @@
 #import "MatchCardsViewController.h"
 
 @interface matchHistoryViewController : MatchCardsViewController
-
+@property (strong, nonatomic) NSMutableString *statusString;
 @end

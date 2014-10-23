@@ -9,10 +9,26 @@
 #import "matchHistoryViewController.h"
 
 @interface matchHistoryViewController ()
+@property (weak, nonatomic) IBOutlet UITextView *statusHistoryTextView;
 
 @end
 
 @implementation matchHistoryViewController
+
+- (void)updateUI
+{
+
+    self.statusHistoryTextView.text = self.statusString;
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self updateUI];
+}
+
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

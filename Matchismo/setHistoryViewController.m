@@ -38,7 +38,7 @@
     self.statusLabel.text = [temp string];
      */
     self.statusHistoryTextView.text = self.statusString;
-    self.statusLabel.text = self.statusString;
+    //self.statusLabel.text = self.statusString;
     
 }
 
