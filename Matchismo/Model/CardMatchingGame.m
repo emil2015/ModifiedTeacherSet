@@ -176,7 +176,7 @@ static const int COST_TO_CHOOSE = 1;
         return;
     } // end if [self countOfChosenCards] == self.numberOfCardsToMatch - 1
 
-    NSLog(@"Count of cards in otherCards = %ld", [otherCards count]);
+    //NSLog(@"Count of cards in otherCards = %ld", [otherCards count]);
     
     int matchScore = [card match:otherCards];
     if (matchScore) {
