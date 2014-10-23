@@ -10,17 +10,19 @@
 #import "SetGameViewController.h"
 @class SecondViewController;
 
-@protocol SecondViewControllerDelegate
+//@protocol SecondViewControllerDelegate
 
--(void) updateLabelWithString:(NSString*)string;
-@property (strong, nonatomic) IBOutlet UILabel *historyLabel;
-@end
+//-(void) updateLabelWithString:(NSString*)string;
+//@property (strong, nonatomic) IBOutlet UILabel *historyLabel;
+//@end
 
 
 @interface setHistoryViewController : SetGameViewController
-@property (weak, nonatomic) id<SecondViewControllerDelegate>delegate;
+//@property (weak, nonatomic) id<SecondViewControllerDelegate>delegate;
 
-@property (strong, nonatomic) IBOutlet UILabel *historyLabel;
+//@property (strong, nonatomic) IBOutlet UILabel *historyLabel;
 
-@property (strong, nonatomic) NSArray *statusHistory;
+
+@property (strong, nonatomic) NSMutableArray *statusHistory;
+@property (strong, nonatomic) NSMutableString *statusString;
 @end
