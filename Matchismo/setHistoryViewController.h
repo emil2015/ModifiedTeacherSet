@@ -19,4 +19,8 @@
 
 @interface setHistoryViewController : SetGameViewController
 @property (weak, nonatomic) id<SecondViewControllerDelegate>delegate;
+
+@property (strong, nonatomic) IBOutlet UILabel *historyLabel;
+
+@property (strong, nonatomic) NSArray *statusHistory;
 @end

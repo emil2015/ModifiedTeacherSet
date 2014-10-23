@@ -9,7 +9,7 @@
 #import "setHistoryViewController.h"
 
 @interface setHistoryViewController ()
-@property (strong, nonatomic) IBOutlet UILabel *historyLabel;
+//@property (strong, nonatomic) IBOutlet UILabel *historyLabel;
 
 @end
 
@@ -36,11 +36,38 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)setHistoryLabel:(NSString *)historyLabel{
+- (void)setStatusHistory:(NSArray *)statusHistory{
+    if(!statusHistory){
+        _statusHistory = statusHistory;
+    }
+}
+
+
+
+- (void)setHistoryLabel:(UILabel *)historyLabel{
+    /*
     NSString *temp = _historyLabel.text;
-    [temp stringByAppendingString:historyLabel];
+    [temp stringByAppendingString:historyLabel.text];
     [temp stringByAppendingString:@"\n"];
     _historyLabel.text = temp;
+    [self updateUI];
+     */
+    //====
+    //_historyLabel = historyLabel;
+    //    [self updateUI];
+    
+}
+
+- (void)updateUI
+{
+    /*
+    int colorfulCharacters = [[self charactersWithAttribute:NSForegroundColorAttributeName] length];
+    self.colorfulCharactersLabel.text = [NSString stringWithFormat:@"%d Colorful Characters", colorfulCharacters];
+    
+    int outlinedCharacters = [[self charactersWithAttribute:NSStrokeWidthAttributeName] length];
+    self.outlinedCharactersLabel.text = [NSString stringWithFormat:@"%d Outlined Characters", outlinedCharacters];
+     */
+    
 }
 
 /*

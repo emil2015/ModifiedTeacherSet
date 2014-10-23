@@ -53,6 +53,26 @@
     return [title string];
 }
 
+- (void)contentsWithAttributes{
+    NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:self.shape];
+    
+    UIColor *foregroundColor = [UIColor redColor];
+    UIColor *strokeColor = [foregroundColor copy];
+    foregroundColor = [foregroundColor colorWithAlphaComponent:1];
+    
+    [title setAttributes:@{NSForegroundColorAttributeName:foregroundColor,
+                           NSStrokeWidthAttributeName:@-5,
+                           NSStrokeColorAttributeName:strokeColor}
+                   range:NSMakeRange(0, [title length])];
+    NSMutableAttributedString *temp = title.copy;
+    for (int i = 1; i < self.count; i++) {
+        [title appendAttributedString:temp.copy];
+    }
+    
+    self.contents2 = title;
+
+}
+
 
 - (NSString *)aString{
     //return @"z";
@@ -119,7 +139,10 @@
     }
 }
 
-
+@synthesize contents2 = _contents2;
+- (void)setContents2:(NSAttributedString *)contents2{
+    _contents2 = contents2;
+}
 
 
 @end

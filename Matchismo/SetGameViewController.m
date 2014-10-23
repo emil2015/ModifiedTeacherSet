@@ -30,6 +30,17 @@
 - (IBAction)returnedFromSegue:(UIStoryboardSegue *)segue {
     NSLog(@"Returned from second view");
 }
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"setHistoryViewController"]) {
+        if ([segue.destinationViewController isKindOfClass:[setHistoryViewController class]]) {
+            setHistoryViewController *tsvc = (setHistoryViewController *) segue.destinationViewController;
+            tsvc.historyLabel.text = self.matchFeebackLabel.text;
+        }
+    }
+}
+
 //--------------------------------------------------------
 -(SetMatchingGame *)game{
     if (!_game) { NSLog(@"Game nil");

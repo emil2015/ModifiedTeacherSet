@@ -15,6 +15,7 @@
 @property (nonatomic, readwrite) NSInteger numberOfCardsToMatch;
 @property (nonatomic, readwrite) NSInteger score;
 @property (nonatomic, strong) NSMutableString *lastMatch;
+@property (nonatomic, strong) NSMutableAttributedString *lastMatchA;
 @property (nonatomic, strong) NSString *space;
 @end
 
@@ -37,7 +38,12 @@
     return _lastMatch;
 }
 
-
+- (NSMutableAttributedString *)lastMatchA{
+    if(!_lastMatchA){
+        _lastMatchA = [[NSMutableAttributedString alloc] init];
+    }
+    return _lastMatchA;
+}
 
 - (NSMutableArray *)cards
 {
@@ -147,13 +153,26 @@ static const int COST_TO_CHOOSE = 1;
     if (matchScore) {
         self.score += matchScore * MATCH_BONUS;
         [self.lastMatch appendString:@"Matched: "];
-        for (Card *otherCard in otherCards) {
+        
+        
+                                                                    //NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:@"Matched: "];
+                                                                    //[self.lastMatchA appendAttributedString:title];
+        
+        for (SetCard *otherCard in otherCards) {
             otherCard.matched = YES;
             [self.lastMatch appendString:otherCard.contents];
+                                                                    //[self.lastMatchA appendAttributedString:otherCard.contents2];
             [self.lastMatch appendString:self.space];
+                                                                    //[self.lastMatchA appendAttributedString:otherCard.contents2];
         } // end for (Card *otherCard in otherCards)
         //[self.lastMatch appendString:card.contents];
         [self.lastMatch appendFormat:@" for %d points", matchScore * MATCH_BONUS];
+        //===
+                                    //NSMutableString *temp;
+                                    //[temp appendFormat:@" for %d points", matchScore * MATCH_BONUS];
+                                    //NSMutableAttributedString *title2 = [[NSMutableAttributedString alloc] initWithString:temp];
+                                    //[self.lastMatchA appendAttributedString:title2];
+        //====
         card.chosen = YES;
         card.matched = YES;
     } else {
@@ -173,6 +192,7 @@ static const int COST_TO_CHOOSE = 1;
     // take away cost of choosing
     self.score -=COST_TO_CHOOSE;
     NSLog(@"%d",self.score);
+    //NSLog(@"%@",self.lastMatchA);
 }
 //---Feedback stuff----
 
@@ -200,7 +220,31 @@ static const int COST_TO_CHOOSE = 1;
     } // end if ([self countOfChosenUnmatchedCards] != 0)
     NSLog(@"%@", feedbackString);
     return feedbackString;
-     
+    
+}
+
+- (NSString *)feedback2
+{
+    
+    NSMutableString *feedbackString = [[NSMutableString alloc] init];
+    
+    if ([self countOfChosenUnmatchedCards] != 0) {
+        // we are in the middle of matching
+        [feedbackString appendString:@"Matching: "];
+        for (SetCard *card in [self getListOfCardsWaitingForMatch]) {
+            [feedbackString appendString:card.contents];
+            [feedbackString appendString:self.space];
+        } // end for (Card *card in [self getListOfCardsWaitingForMatch])
+    } else {
+        // we either just got started or just completed a match
+        [feedbackString appendString:self.lastMatch];
+        //--
+        
+        //--
+        self.lastMatch = Nil;
+    } // end if ([self countOfChosenUnmatchedCards] != 0)
+    NSLog(@"%@", feedbackString);
+    return feedbackString;
     
 }
 

@@ -22,6 +22,8 @@
 + (NSArray *)alphaArray;
 
 @property (strong, nonatomic) NSString *contents;
+@property (strong, nonatomic) NSAttributedString *contents2;
+
 
 - (NSString *)aString;
 
