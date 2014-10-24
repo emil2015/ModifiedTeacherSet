@@ -116,7 +116,7 @@
 
 
 - (void)setHistoryLabel:(UILabel *)historyLabel{
-    /*
+ 
     NSString *temp = _historyLabel.text;
     [temp stringByAppendingString:historyLabel.text];
     [temp stringByAppendingString:@"\n"];
@@ -131,7 +131,7 @@
 
 - (void)updateUI
 {
-    /*
+ 
     int colorfulCharacters = [[self charactersWithAttribute:NSForegroundColorAttributeName] length];
     self.colorfulCharactersLabel.text = [NSString stringWithFormat:@"%d Colorful Characters", colorfulCharacters];
     
@@ -141,7 +141,7 @@
     
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation

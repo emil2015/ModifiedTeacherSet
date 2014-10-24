@@ -48,7 +48,6 @@
                 [temp appendString:[[NSMutableString alloc] initWithString:@"\n"]];
             }
             tsvc.statusString = temp;
-            
         }
     }
 }
@@ -58,6 +57,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    //Put this updateUI in to deal the cards as soon as the view loads. 
+    [self updateUI];
 
 }
 
