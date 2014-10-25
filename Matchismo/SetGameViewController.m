@@ -57,7 +57,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    //Put this updateUI in to deal the cards as soon as the view loads. 
+    //Put this updateUI in to deal the cards as soon as the view loads.
     [self updateUI];
 
 }
@@ -176,7 +176,7 @@
         [title setAttributes:@{NSForegroundColorAttributeName:[card.color colorWithAlphaComponent:card.alpha],
                                NSStrokeWidthAttributeName:@-5,
                                NSStrokeColorAttributeName:card.color}
-                       range:NSMakeRange(0, [title length])];
+                                                    range:NSMakeRange(0, [title length])];
         [cardButton setAttributedTitle:title forState:UIControlStateNormal];
          
         //[cardButton setAttributedTitle:card.contents forState:UIControlStateNormal];
