@@ -30,30 +30,26 @@
 
 - (void)updateUI
 {
+
+    //DO NOT FORGET TO INCREASE THE NUMBER OF LINES IN THE LABEL OR YOU WILL NOT SEE ANYTHING.
+    NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithAttributedString:self.statusString];
+    [self.statusLabel setAttributedText:title.copy];
+    
+    //Do not need anything below here.
+    
+    
     /*
-    NSMutableAttributedString *temp = [[NSMutableAttributedString alloc] initWithString:@""];
-    for (NSAttributedString *aString in self.statusHistory) {
-        [temp appendAttributedString:aString];
-        [temp appendAttributedString:[[NSMutableAttributedString alloc] initWithString:@"\n"]];
-    }
-    self.statusHistoryTextView.text = [temp string];
-    self.statusLabel.text = [temp string];
+     NSMutableAttributedString *temp = [[NSMutableAttributedString alloc] initWithString:@""];
+     for (NSAttributedString *aString in self.statusHistory) {
+     [temp appendAttributedString:aString];
+     [temp appendAttributedString:[[NSMutableAttributedString alloc] initWithString:@"\n"]];
+     }
+     self.statusHistoryTextView.text = [temp string];
+     self.statusLabel.text = [temp string];
      */
     
     //Working one
     //self.statusHistoryTextView.text = self.statusString;
-    
-    NSAttributedString *title = [[NSAttributedString alloc] initWithAttributedString:self.statusString];
-    //title = self.statusString;
-    [self.statusLabel setAttributedText:title.copy];
-    
-    //TODO==========================
-    //It is not settin the label text properly. 
-    
-    //==================================
-    
-    
-    //====
     
     /*
     NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:@"Hello"]; //self.shape];

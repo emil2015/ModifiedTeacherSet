@@ -24,7 +24,6 @@
 //- (void)matchThreeCards;
 
 - (NSAttributedString *)feedback;
-- (NSAttributedString *)feedback2;
 @property (nonatomic, readonly) NSInteger score;
 @property (nonatomic, readonly) NSInteger numberOfCardsToMatch;
 
