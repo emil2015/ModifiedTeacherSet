@@ -180,10 +180,19 @@ static const int COST_TO_CHOOSE = 1;
     } else {
         self.score -= MISMATCH_PENALTY;
         [self.lastMatch appendString:@"No Match: "];
-        for (Card *otherCard in otherCards) {
+        //====
+        NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:@"Matched: "];
+        [self.lastMatchA appendAttributedString:title];
+        //====
+        for (SetCard *otherCard in otherCards) {
             otherCard.chosen = NO;
             [self.lastMatch appendString:otherCard.contents];
             [self.lastMatch appendString:self.space];
+            //====
+            [self.lastMatchA appendAttributedString:[otherCard contentsWithAttributes]];
+            [self.lastMatchA appendAttributedString:[[NSMutableAttributedString alloc] initWithString:@" "]];
+            //===
+            
         } // end for (Card *otherCard in otherCards)
         //[self.lastMatch appendString:card.contents];
         [self.lastMatch appendFormat:@" %d points penalty", MISMATCH_PENALTY];
@@ -199,7 +208,7 @@ static const int COST_TO_CHOOSE = 1;
 //---Feedback stuff----
 
 
-
+/* Regular string feedback
 - (NSString *)feedback
 {
     
@@ -224,8 +233,10 @@ static const int COST_TO_CHOOSE = 1;
     return feedbackString;
     
 }
-
-- (NSAttributedString *)feedback2
+*/
+ 
+ 
+- (NSAttributedString *)feedback
 {
     
     NSMutableAttributedString *feedbackString = [[NSMutableAttributedString alloc] init];
@@ -236,9 +247,9 @@ static const int COST_TO_CHOOSE = 1;
         [feedbackString appendAttributedString:[[NSAttributedString alloc] initWithString:@"Matching: "]];
         for (SetCard *card in [self getListOfCardsWaitingForMatch]) {
             //[feedbackString appendString:card.contents];
-            [feedbackString appendAttributedString:card.contents2];
+            [feedbackString appendAttributedString:[card contentsWithAttributes]];
             //[feedbackString appendString:self.space];
-            [feedbackString appendAttributedString:card.contents2];
+            //[feedbackString appendAttributedString:[card contentsWithAttributes]];
         } // end for (Card *card in [self getListOfCardsWaitingForMatch])
     } else {
         // we either just got started or just completed a match

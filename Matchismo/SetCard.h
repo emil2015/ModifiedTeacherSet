@@ -25,7 +25,7 @@
 @property (strong, nonatomic) NSAttributedString *contents2;
 
 
-- (NSString *)aString;
+//- (NSString *)aString;
 
 - (int)match:(NSArray *)otherCards;
 

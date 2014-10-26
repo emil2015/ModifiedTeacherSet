@@ -12,19 +12,21 @@
 //@property (strong, nonatomic) IBOutlet UILabel *historyLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
-@property (weak, nonatomic) IBOutlet UITextView *statusHistoryTextView;
+//@property (weak, nonatomic) IBOutlet UITextView *statusHistoryTextView;
 @end
 
 @implementation setHistoryViewController
 
 
-
+/*
 - (void)setStatusHistory:(NSMutableArray *)statusHistory{
     _statusHistory = statusHistory;
     if (self.view.window){
         [self updateUI];
     }
 }
+*/
+
 
 - (void)updateUI
 {
@@ -37,15 +39,44 @@
     self.statusHistoryTextView.text = [temp string];
     self.statusLabel.text = [temp string];
      */
-    self.statusHistoryTextView.text = self.statusString;
-    //self.statusLabel.text = self.statusString;
     
+    //Working one
+    //self.statusHistoryTextView.text = self.statusString;
+    
+    NSAttributedString *title = [[NSAttributedString alloc] initWithAttributedString:self.statusString];
+    //title = self.statusString;
+    [self.statusLabel setAttributedText:title.copy];
+    
+    //TODO==========================
+    //It is not settin the label text properly. 
+    
+    //==================================
+    
+    
+    //====
+    
+    /*
+    NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:@"Hello"]; //self.shape];
+    
+    UIColor *foregroundColor = [UIColor greenColor];
+    UIColor *strokeColor = [foregroundColor copy];
+    foregroundColor = [foregroundColor colorWithAlphaComponent:1];
+    
+    [title setAttributes:@{NSForegroundColorAttributeName:foregroundColor,
+                           NSStrokeWidthAttributeName:@-5,
+                           NSStrokeColorAttributeName:strokeColor}
+                   range:NSMakeRange(0, [title length])];
+    
+    //self.statusHistoryTextView.text = title.copy;
+    [self.statusLabel setAttributedText:title];
+    */
 }
 
+/*I may or may not need this block
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self updateUI];
+    //[self updateUI];
 }
 
 - (void)viewDidLoad
@@ -53,6 +84,8 @@
     [super viewDidLoad];
     //    self.textToAnalyze = [[NSAttributedString alloc] initWithString:@"test" attributes:@{NSForegroundColorAttributeName:[UIColor greenColor],NSStrokeWidthAttributeName:@-3}];
 }
+*/
+
 
 /*
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil

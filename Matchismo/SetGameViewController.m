@@ -42,10 +42,10 @@
             setHistoryViewController *tsvc = (setHistoryViewController *) segue.destinationViewController;
             //tsvc.statusHistory = self.statusHistory;
             
-            NSMutableString *temp = [[NSMutableString alloc] initWithString:@""];
-            for (NSMutableString *aString in self.statusHistory) {
-                [temp appendString:aString];
-                [temp appendString:[[NSMutableString alloc] initWithString:@"\n"]];
+            NSMutableAttributedString *temp = [[NSMutableAttributedString alloc] initWithString:@""];
+            for (NSAttributedString *aString in self.statusHistory) {
+                [temp appendAttributedString:aString];
+                [temp appendAttributedString:[[NSMutableAttributedString alloc] initWithString:@"\n"]];
             }
             tsvc.statusString = temp;
         }
@@ -151,13 +151,20 @@
         
             [cardButton setBackgroundImage:[self imageForCard:card] forState:UIControlStateNormal];
         
-        
-        
 
     }
     self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
-    self.matchFeebackLabel.text = [NSString stringWithFormat:@"%@", [self.game feedback]];
-    [self.statusHistory addObject:self.matchFeebackLabel.text];
+    //Regular string? Old way that did work
+    //self.matchFeebackLabel.text = [NSString stringWithFormat:@"%@", [self.game feedback]];
+    
+    //TODO================================================================================================================================================================================================
+    //This matchFeeBackLabel is broken.
+    //self.matchFeebackLabel.text = [self.game feedback];
+
+    [self.matchFeebackLabel setAttributedText:[self.game feedback]];
+    //================================================================================================================================================================================================
+    
+    [self.statusHistory addObject:self.matchFeebackLabel.attributedText];
     
 }
 
