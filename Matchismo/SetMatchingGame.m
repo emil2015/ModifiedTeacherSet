@@ -117,7 +117,7 @@
     return count;
 }
 
-//----
+//---- NEED TO CHANGE WORDING, SAYS MATCHED EVEN IF IT'S NOT MATCHED
 static const int MISMATCH_PENALTY = 2;
 static const int MATCH_BONUS = 4;
 static const int COST_TO_CHOOSE = 1;
@@ -163,10 +163,13 @@ static const int COST_TO_CHOOSE = 1;
             [self.lastMatch appendString:otherCard.contents];
                                                                     [self.lastMatchA appendAttributedString:[otherCard contentsWithAttributes]];
             [self.lastMatch appendString:self.space];
-                                                                    [self.lastMatchA appendAttributedString:[otherCard contentsWithAttributes]];
+                                                                    [self.lastMatchA appendAttributedString:[[NSAttributedString alloc] initWithString:@" "]];
         } // end for (Card *otherCard in otherCards)
         //[self.lastMatch appendString:card.contents];
         [self.lastMatch appendFormat:@" for %d points", matchScore * MATCH_BONUS];
+        
+        NSString *temp = [[NSString alloc] initWithFormat:@" for %d points", matchScore * MATCH_BONUS];
+        [self.lastMatchA appendAttributedString:[[NSAttributedString alloc] initWithString:temp]];
         //===
         
                                                                     //NSMutableString *temp;
@@ -181,7 +184,7 @@ static const int COST_TO_CHOOSE = 1;
         self.score -= MISMATCH_PENALTY;
         [self.lastMatch appendString:@"No Match: "];
         //====
-        NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:@"Matched: "];
+        NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:@"No Match: "];
         [self.lastMatchA appendAttributedString:title];
         //====
         for (SetCard *otherCard in otherCards) {
@@ -196,6 +199,8 @@ static const int COST_TO_CHOOSE = 1;
         } // end for (Card *otherCard in otherCards)
         //[self.lastMatch appendString:card.contents];
         [self.lastMatch appendFormat:@" %d points penalty", MISMATCH_PENALTY];
+        NSString *temp = [[NSString alloc] initWithFormat:@" %d points penalty", MISMATCH_PENALTY];
+        [self.lastMatchA appendAttributedString:[[NSAttributedString alloc] initWithString:temp]];
         card.chosen = NO;
         card.matched = NO;
     } // end if matchScore
