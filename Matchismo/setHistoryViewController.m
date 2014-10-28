@@ -35,6 +35,7 @@
     NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithAttributedString:self.statusString];
     [self.statusLabel setAttributedText:title.copy];
     
+    
     //Do not need anything below here.
     
     
