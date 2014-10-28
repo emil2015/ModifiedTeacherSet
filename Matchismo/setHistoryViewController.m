@@ -10,6 +10,7 @@
 
 @interface setHistoryViewController ()
 //@property (strong, nonatomic) IBOutlet UILabel *historyLabel;
+@property (weak, nonatomic) IBOutlet UITextView *statusTextView;
 
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
 //@property (weak, nonatomic) IBOutlet UITextView *statusHistoryTextView;
@@ -33,8 +34,8 @@
 
     //DO NOT FORGET TO INCREASE THE NUMBER OF LINES IN THE LABEL OR YOU WILL NOT SEE ANYTHING.
     NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithAttributedString:self.statusString];
-    [self.statusLabel setAttributedText:title.copy];
-    
+    //[self.statusLabel setAttributedText:title.copy];
+    [self.statusTextView setAttributedText:title.copy];
     
     //Do not need anything below here.
     
