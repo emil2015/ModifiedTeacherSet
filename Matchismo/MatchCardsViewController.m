@@ -99,6 +99,7 @@
     } else {
         [self.game matchTwoCards];
     } // end if isOn
+    self.statusHistory = nil;
 }
 
 //
@@ -110,6 +111,7 @@
     [self.game resetScore];
     [self updateUI];
     self.cardMatchSlider.enabled = YES;
+    self.statusHistory = nil;
 }
 
 - (IBAction)touchCardButton:(UIButton *)sender
@@ -133,7 +135,10 @@
     self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
     self.matchFeebackLabel.text = [NSString stringWithFormat:@"%@", [self.game feedback]];
     
-    [self.statusHistory addObject:self.matchFeebackLabel.text];
+    if (![self.matchFeebackLabel.text isEqualToString:@""]) {
+        [self.statusHistory addObject:self.matchFeebackLabel.text];
+    }
+    
 }
 
 - (NSString *)titleForCard:(Card *)card

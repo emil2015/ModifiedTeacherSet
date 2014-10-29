@@ -56,9 +56,10 @@
 - (NSMutableAttributedString *)contentsWithAttributes{
     NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:self.shape];
     
-    UIColor *foregroundColor = [UIColor redColor];
+    UIColor *foregroundColor = self.color;
     UIColor *strokeColor = [foregroundColor copy];
-    foregroundColor = [foregroundColor colorWithAlphaComponent:1];
+    
+    foregroundColor = [foregroundColor colorWithAlphaComponent:self.alpha];
     
     [title setAttributes:@{NSForegroundColorAttributeName:foregroundColor,
                            NSStrokeWidthAttributeName:@-5,
@@ -75,7 +76,7 @@
 }
 
 
-- (NSString *)aString{
+//- (NSString *)aString{
     //return @"z";
     /*
     NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:self.shape];
@@ -95,8 +96,8 @@
     
     return [title string];
      */
-    return [self contents];
-}
+//    return [self contents];
+//}
 
 
 

@@ -21,6 +21,8 @@
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UILabel *matchFeebackLabel;
+@property BOOL isGameRest;
+
 
 //====
 @property (strong, nonatomic) NSMutableArray *statusHistory;
@@ -35,21 +37,23 @@
     return _statusHistory;
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+
     if ([segue.identifier isEqualToString:@"d"]) {
         if ([segue.destinationViewController isKindOfClass:[setHistoryViewController class]]) {
             setHistoryViewController *tsvc = (setHistoryViewController *) segue.destinationViewController;
             //tsvc.statusHistory = self.statusHistory;
             
-            NSMutableString *temp = [[NSMutableString alloc] initWithString:@""];
-            for (NSMutableString *aString in self.statusHistory) {
-                [temp appendString:aString];
-                [temp appendString:[[NSMutableString alloc] initWithString:@"\n"]];
+            NSMutableAttributedString *temp = [[NSMutableAttributedString alloc] initWithString:@""];
+            for (NSAttributedString *aString in self.statusHistory) {
+                [temp appendAttributedString:aString];
+                [temp appendAttributedString:[[NSMutableAttributedString alloc] initWithString:@"\n"]];
             }
             tsvc.statusString = temp;
+
         }
     }
+    
 }
 
 
@@ -59,6 +63,7 @@
     // Do any additional setup after loading the view, typically from a nib.
     //Put this updateUI in to deal the cards as soon as the view loads.
     [self updateUI];
+    self.isGameRest = NO;
 
 }
 
@@ -78,19 +83,7 @@
 - (IBAction)returnedFromSegue:(UIStoryboardSegue *)segue {
     NSLog(@"Returned from second view");
 }
-/*
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([segue.identifier isEqualToString:@"setHistoryViewController"]) {
-        if ([segue.destinationViewController isKindOfClass:[setHistoryViewController class]]) {
-            setHistoryViewController *tsvc = (setHistoryViewController *) segue.destinationViewController;
-            tsvc.historyLabel.text = self.matchFeebackLabel.text;
-        }
-    }
-}
 
-//--------------------------------------------------------
- */
 -(SetMatchingGame *)game{
     if (!_game) { NSLog(@"Game nil");
         _game = [[SetMatchingGame alloc] initWithCardCount:[self.cardButtons count]
@@ -111,6 +104,10 @@
                                               usingDeck:[self createDeck]];
     [self.game resetScore];
     [self updateUI];
+    
+    self.isGameRest = YES;
+    self.statusHistory = nil;
+    
 }
 
 
@@ -126,29 +123,7 @@
 
 - (NSString *)titleForCard:(SetCard *)card
 {
-    //return card.isChosen ? card.contents : @"";
-    //return card.contents;
-    //return @"g";
-    //------
-    /*
-    NSString *first = card.shape;
-    if (card.count == 2) {
-        return [first stringByAppendingString:first];
-    }else
-    if (card.count == 3) {
-        return [[first stringByAppendingString:first] stringByAppendingString:first];
-    }else
-        return first;
-     */
-    //-------
-    /*
-    for (int i = 1; i < card.count; i++) {
-        [result appendString:card.shape.copy];
-    }*/
-    
-    //for loop to determin the number of items.
-    
-    //return card.aString; //This works, now I need to make it a string with attributes
+
     return card.contents;
 }
 
@@ -185,60 +160,29 @@
         
             [cardButton setBackgroundImage:[self imageForCard:card] forState:UIControlStateNormal];
         
-        
-        
 
-    } // end for cardButton
-    //self.scoreLabel.text = [NSString stringWithFormat:@"Score: %ld", self.game.score];
-    //self.matchFeebackLabel.text = [NSString stringWithFormat:@"%@", [self.game feedback]];
+    }
     self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
-    //This is what is currently broken
-    //if ([self.game feedback] != nil) {
+    //Regular string? Old way that did work
+    //self.matchFeebackLabel.text = [NSString stringWithFormat:@"%@", [self.game feedback]];
+    
+    //TODO================================================================================================================================================================================================
+    //This matchFeeBackLabel is broken.
+    //self.matchFeebackLabel.text = [self.game feedback];
+
+    [self.matchFeebackLabel setAttributedText:[self.game feedback]];
+    //================================================================================================================================================================================================
     
     
-    //====
-        self.matchFeebackLabel.text = [NSString stringWithFormat:@"%@", [self.game feedback]];
-    //====
-    //self.matchFeebackLabel.text = [NSAttributedString stringWithFormat:@"%@", [self.game feedback2]];
-    //self.matchFeebackLabel.text = [[self.game feedback2] string];
     
-    //[self.statusHistory addObject:[self.game feedback]];
-    [self.statusHistory addObject:self.matchFeebackLabel.text];
-    //}
-    
+    if (![self.matchFeebackLabel.text isEqualToString:@""]) {
+        [self.statusHistory addObject:self.matchFeebackLabel.attributedText];
+    }
+
     
 }
 
-//---------------
 
 
 @end
 
-/*
- - (void)updateUI
- {NSLog(@"updateUI called");
- for (UIButton *cardButton in self.cardButtons) {
- 
- NSUInteger cardIndex = [self.cardButtons indexOfObject:cardButton];
- SetCard *card = [self.game cardAtIndex:cardIndex];
- 
- [cardButton setTitle:[self titleForCard:card] forState:UIControlStateNormal];
- [cardButton setTitleColor:card.color forState:UIControlStateNormal];
- //[cardButton.titleLabel setAlpha:card.alpha];
- *
- [cardButton setTitleColor:[UIColor colorWithRed:0.3 green:0.6 blue:0.9 alpha:0.5]
- //                                set 'alpha' to something less than 1. -----^^^
- forState:UIControlStateNormal];
- *
-
-
-
-//[cardButton setBackgroundImage:[self imageForCard:card] forState:UIControlStateNormal];
-
-cardButton.enabled = !card.matched;
-
-} // end for cardButton
-//self.scoreLabel.text = [NSString stringWithFormat:@"Score: %ld", self.game.score];
-//self.matchFeebackLabel.text = [NSString stringWithFormat:@"%@", [self.game feedback]];
-}
-*/

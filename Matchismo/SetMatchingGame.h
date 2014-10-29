@@ -23,8 +23,7 @@
 //- (void)matchTwoCards;
 //- (void)matchThreeCards;
 
-- (NSString *)feedback;
-- (NSAttributedString *)feedback2;
+- (NSAttributedString *)feedback;
 @property (nonatomic, readonly) NSInteger score;
 @property (nonatomic, readonly) NSInteger numberOfCardsToMatch;
 

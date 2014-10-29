@@ -22,7 +22,12 @@
 
 //@property (strong, nonatomic) IBOutlet UILabel *historyLabel;
 
+//Do I need this?
+//@property (strong, nonatomic) NSMutableArray *statusHistory;
 
-@property (strong, nonatomic) NSMutableArray *statusHistory;
-@property (strong, nonatomic) NSMutableString *statusString;
+//My currently working string thingy.
+@property (strong, nonatomic) NSMutableAttributedString *statusString;
+
+
+
 @end
