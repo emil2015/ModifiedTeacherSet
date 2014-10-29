@@ -27,4 +27,7 @@
 
 //My currently working string thingy.
 @property (strong, nonatomic) NSMutableAttributedString *statusString;
+
+
+
 @end

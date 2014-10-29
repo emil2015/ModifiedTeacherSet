@@ -155,7 +155,7 @@ static const int COST_TO_CHOOSE = 1;
         [self.lastMatch appendString:@"Matched: "];
         
         
-                                                                    NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:@"Matched: "];
+                                                                    NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:@"Matched:  "];
                                                                     [self.lastMatchA appendAttributedString:title];
         
         for (SetCard *otherCard in otherCards) {
@@ -249,7 +249,7 @@ static const int COST_TO_CHOOSE = 1;
     if ([self countOfChosenUnmatchedCards] != 0) {
         // we are in the middle of matching
         //[feedbackString appendString:@"Matching: "];
-        [feedbackString appendAttributedString:[[NSAttributedString alloc] initWithString:@"Matching: "]];
+        [feedbackString appendAttributedString:[[NSAttributedString alloc] initWithString:@"Matching:  "]];
         for (SetCard *card in [self getListOfCardsWaitingForMatch]) {
             //[feedbackString appendString:card.contents];
             [feedbackString appendAttributedString:[card contentsWithAttributes]];

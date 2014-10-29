@@ -14,9 +14,14 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
 //@property (weak, nonatomic) IBOutlet UITextView *statusHistoryTextView;
+
+
+
 @end
 
 @implementation setHistoryViewController
+
+
 
 
 /*
@@ -31,6 +36,7 @@
 
 - (void)updateUI
 {
+    
 
     //DO NOT FORGET TO INCREASE THE NUMBER OF LINES IN THE LABEL OR YOU WILL NOT SEE ANYTHING.
     NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithAttributedString:self.statusString];

@@ -21,6 +21,8 @@
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UILabel *matchFeebackLabel;
+@property BOOL isGameRest;
+
 
 //====
 @property (strong, nonatomic) NSMutableArray *statusHistory;
@@ -35,8 +37,8 @@
     return _statusHistory;
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+
     if ([segue.identifier isEqualToString:@"d"]) {
         if ([segue.destinationViewController isKindOfClass:[setHistoryViewController class]]) {
             setHistoryViewController *tsvc = (setHistoryViewController *) segue.destinationViewController;
@@ -48,8 +50,10 @@
                 [temp appendAttributedString:[[NSMutableAttributedString alloc] initWithString:@"\n"]];
             }
             tsvc.statusString = temp;
+
         }
     }
+    
 }
 
 
@@ -59,6 +63,7 @@
     // Do any additional setup after loading the view, typically from a nib.
     //Put this updateUI in to deal the cards as soon as the view loads.
     [self updateUI];
+    self.isGameRest = NO;
 
 }
 
@@ -99,6 +104,10 @@
                                               usingDeck:[self createDeck]];
     [self.game resetScore];
     [self updateUI];
+    
+    self.isGameRest = YES;
+    self.statusHistory = nil;
+    
 }
 
 
@@ -164,7 +173,12 @@
     [self.matchFeebackLabel setAttributedText:[self.game feedback]];
     //================================================================================================================================================================================================
     
-    [self.statusHistory addObject:self.matchFeebackLabel.attributedText];
+    
+    
+    if (![self.matchFeebackLabel.text isEqualToString:@""]) {
+        [self.statusHistory addObject:self.matchFeebackLabel.attributedText];
+    }
+
     
 }
 
