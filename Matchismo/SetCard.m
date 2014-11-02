@@ -106,7 +106,7 @@
 }
 + (NSArray *)colorArray{
     //return @[@1,@2,@3];
-    return @[[UIColor greenColor], [UIColor redColor], [UIColor blueColor]];
+    return @[[UIColor greenColor], [UIColor redColor], [UIColor purpleColor]];
 }
 + (NSArray *)countArray{
     return @[@1,@2,@3];
